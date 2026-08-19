@@ -42,7 +42,7 @@
       };
 
       // "..." placeholder while we resolve the event source.
-      RG.UI.text(this, W / 2, 210, '…', { size: 44, color: RG.Config.COLORS.textDim, originX: 0.5, originY: 0 });
+      this._pendingTxt = RG.UI.text(this, W / 2, 210, '…', { size: 44, color: RG.Config.COLORS.textDim, originX: 0.5, originY: 0 });
 
       const self = this;
       RG.AI.getMysteryEvent(ctx, function (event) {
@@ -54,6 +54,8 @@
       const S = RG.State;
       const W = RG.Config.GAME_WIDTH;
       const H = RG.Config.GAME_HEIGHT;
+
+      if (this._pendingTxt) { this._pendingTxt.destroy(); this._pendingTxt = null; }
 
       // Title
       RG.UI.text(this, W / 2, 150, event.title, { size: 40, color: RG.Config.COLORS.text, originX: 0.5, originY: 0 });
