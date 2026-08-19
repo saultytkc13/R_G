@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <meta name="theme-color" content="#07060d" />
+  <title>Fallowmire — a folk-horror roguelike</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      background: #07060d;
+      overflow: hidden;
+    }
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    #game-container {
+      width: 100vw;
+      height: 100vh;
+    }
+    #game-container canvas {
+      display: block;
+      margin: 0 auto;
+    }
+    noscript {
+      color: #e6dcc3;
+      font-family: Georgia, "Times New Roman", serif;
+      text-align: center;
+      padding: 40px;
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+  <div id="game-container"></div>
+  <noscript>Fallowmire needs JavaScript to run.</noscript>
+
+  <!--
+    Phaser 3 is the ONLY external dependency. It is loaded from a CDN so the
+    game runs with zero build step and zero backend. Everything else is plain
+    JavaScript files loaded below in dependency order (classic scripts, no
+    ES modules, so the game also works when index.html is opened directly
+    from the filesystem).
+  -->
+  <script src="https://cdn.jsdelivr.net/npm/phaser@3.60.0/dist/phaser.min.js"></script>
+
+  <!-- Constants, colours, sizes, AI on/off flag, placeholder AI endpoint -->
+  <script src="src/config.js"></script>
+
+  <!-- Pure data (no AI, no Phaser): fallback mystery events -->
+  <script src="src/data/events.js"></script>
+
+  <!-- Pure data: enemy roster + boss, scaling helpers -->
+  <script src="src/data/enemies.js"></script>
+
+  <!-- Deterministic procedural node-map generator -->
+  <script src="src/data/mapLayout.js"></script>
+
+  <!-- Single source of truth for run state (hp / gold / floor / effects) -->
+  <script src="src/state.js"></script>
+
+  <!-- Isolated AI integration layer (off by default, validates + falls back) -->
+  <script src="src/ai/aiClient.js"></script>
+
+  <!-- Code-generated placeholder art (no asset files required) -->
+  <script src="src/ui/textures.js"></script>
+
+  <!-- Shared UI helpers: panels, buttons, HUD, floating text, SFX -->
+  <script src="src/ui/ui.js"></script>
+
+  <!-- Phaser scenes -->
+  <script src="src/scenes/BootScene.js"></script>
+  <script src="src/scenes/MapScene.js"></script>
+  <script src="src/scenes/MysteryScene.js"></script>
+  <script src="src/scenes/CombatScene.js"></script>
+  <script src="src/scenes/GameOverScene.js"></script>
+
+  <!-- Game config / init -->
+  <script src="src/main.js"></script>
+</body>
+</html>
